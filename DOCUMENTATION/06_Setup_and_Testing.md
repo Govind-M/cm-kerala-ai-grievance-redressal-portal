@@ -116,3 +116,15 @@ After deployment, check health/DB, active departments, published pages and FAQ, 
 Separate `vercel.app` and `onrender.com` sites may block third-party cookies despite correct SameSite settings. Verify in a real browser; if unreliable, use same-site custom domains or a reviewed reverse proxy rather than weakening authentication. Check desktop/tablet/mobile navigation, forms, validation and dashboard layout. Browser acceptance and actual hosted URLs remain unverified until executed.
 
 Deployment references: [Render FastAPI](https://render.com/docs/deploy-fastapi), [Render Blueprint fields](https://render.com/docs/blueprint-spec), [Vercel rewrites](https://vercel.com/docs/routing/rewrites).
+
+## Deployment readiness verification — 18 November 2026
+
+The existing [submission repository](https://github.com/Govind-M/cm-kerala-ai-grievance-redressal-portal) was verified through `git ls-remote`: published `main` matched source commit `9e4477cfee77252e63289fdac36c81c3af2dc66d`. No repository recreation or history reset was performed.
+
+A new deployment-relevant backend run passed **214 tests, with one skip and 20 upstream warnings**; no database test URL was selected. Ruff, compilation of 145 Python files and dependency consistency passed. Frontend regression again passed **195 tests**; default and AI-enabled builds passed. These readiness checks are separate from the full local regression above.
+
+Production import/lifespan and liveness were checked with synthetic process-only settings. Exact-origin credentialed CORS passed, an untrusted origin was rejected, and unauthenticated Citizen/CMO/Officer routes returned 401. This does not establish hosted cookie behavior.
+
+Read-only verification of the approved existing Supabase target confirmed PostgreSQL 17.12, revision `0008`, all 17 application tables, pgvector 0.8.2 and `vector(768)`. Runtime SELECT/INSERT/UPDATE privileges were inspected without exercising writes. The client uses `verify-full`; configured pooling is bounded to three connections plus two overflow, with a ten-second acquisition timeout. This local check does not establish Render egress or certificate-file availability.
+
+Actual Render/Vercel deployment remains pending: no authenticated hosting CLI or connected integration was available, and browser automation failed during runtime initialization. The operator must connect hosting access and either enter backend secrets privately or explicitly authorize their transfer. No cloud secret values are included here. Gemini and Storage requests and hosted application writes during these checks: **zero**.

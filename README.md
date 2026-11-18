@@ -59,7 +59,9 @@ Backend tests require an empty loopback PostgreSQL database ending in `_test`; n
 
 Render runs `backend/` natively with Uvicorn. Vercel uses `frontend/`, Vite and the included SPA rewrite. Exact HTTPS CORS/CSRF origins and secure cookie settings are required. Separate Render/Vercel domains may encounter third-party cookie restrictions; use same-site custom domains or a reviewed proxy if needed.
 
-Hosted frontend, backend and GitHub URLs: not yet provisioned or verified. No placeholder deployment is represented as live.
+GitHub repository: [Govind-M/cm-kerala-ai-grievance-redressal-portal](https://github.com/Govind-M/cm-kerala-ai-grievance-redressal-portal). Published `main` was verified against the local submission commit.
+
+Render backend and Vercel frontend: not yet deployed or verified. Hosting-account access and secure environment configuration are pending; no placeholder deployment is represented as live.
 
 ## Documentation
 
