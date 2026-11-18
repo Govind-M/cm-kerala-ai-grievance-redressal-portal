@@ -1,0 +1,36 @@
+services:
+  - type: web
+    name: cm-kerala-api
+    runtime: python
+    plan: free
+    rootDir: backend
+    buildCommand: pip install -r requirements.txt
+    startCommand: uvicorn app.main:app --host 0.0.0.0 --port $PORT
+    healthCheckPath: /api/v1/health
+    envVars:
+      - key: PYTHON_VERSION
+        value: 3.14.0
+      - key: APP_ENV
+        value: production
+      - key: APP_DEBUG
+        value: "false"
+      - key: DATABASE_TARGET
+        value: supabase
+      - key: SUPABASE_DATABASE_URL
+        sync: false
+      - key: JWT_SECRET_KEY
+        generateValue: true
+      - key: CORS_ORIGINS
+        sync: false
+      - key: AUTH_TRUSTED_ORIGINS
+        sync: false
+      - key: AUTH_COOKIE_SECURE
+        value: "true"
+      - key: AUTH_COOKIE_SAMESITE
+        value: none
+      - key: AI_ENABLED
+        value: "false"
+      - key: AI_LIVE_REQUESTS_ENABLED
+        value: "false"
+      - key: AI_MAX_RETRIES
+        value: "0"
